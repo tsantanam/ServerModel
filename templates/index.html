@@ -1,0 +1,198 @@
+<!doctype html>
+
+<style>
+
+    .bg-cover {
+    background-size: cover !important;
+    color: green;
+    }
+
+    .color-blue{
+      color:green;
+    }
+    h1 {
+        color: white;
+        text-align: center;
+    }
+
+    body {
+        min-height: 100vh;
+        text-align: center;
+        background-color:lightgrey;
+    }
+
+    input[type="submit"] {
+      background-color: lightgreen; /* Green */
+      border: none;
+      color: black;
+        font-weight: bold;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+    }
+
+    input[type="submit"]:hover {
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+
+    input[type="submit"]:disabled {
+      background-color: grey; /* Green */
+      border: none;
+      color: black;
+        font-weight: bold;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+      box-shadow: none;
+    }
+
+    input[type="file"] {
+      background-color: lightgreen; /* Green */
+      border: none;
+      color: black;
+        font-weight: bold;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+    }
+
+    input[type="file"]:hover {
+         box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+    input[type="reset"] {
+      background-color: lightgreen; /* Green */
+      border: none;
+      color: black;
+        font-weight: bold;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+    }
+
+    input[type="reset"]:hover {
+         box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+
+    input[type="file"]:disabled {
+      background-color: grey; /* Green */
+      border: none;
+      color: black;
+        font-weight: bold;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+      box-shadow: none;
+    }
+.jumbotron{
+    width: 100%;
+    height: 130px;
+    color: white;
+    font-weight: bold;
+    font-size: 36px;
+    font-family: "Roboto Light";
+}
+
+</style>
+<!-- Bootstrap Static Header -->
+<script>
+    function easter_egg() {
+                    if (document.getElementById("head").innerHTML === "A LDO  Bus S op Funding Alloca ion  ool") {
+                        document.getElementById("head").innerHTML = "ATLDOT Bus Stop Funding Allocation Tool";
+                    }
+                    else {
+                        document.getElementById("head").innerHTML = "A LDO  Bus S op Funding Alloca ion  ool";
+                    }
+                }
+</script>
+<button style="background-color:green" id="head" class="jumbotron" onclick="easter_egg()">
+    ATLDOT Bus Stop Funding Allocation Tool
+</button>
+<body>
+    <br><br>
+        <form action="/funding-allocation/" method="POST" enctype = "multipart/form-data">
+            <p>Upload file called "input.csv"</p>
+            {% if result %}
+            <input type = "file" name = "file" disabled/>
+            Budget:
+            <input type="text" name="budget_input" value={{result}} />
+            <br><br>
+            <input type="submit" name="submit_button3" value="Submit Uploaded File and Set Budget" disabled/>
+            <br><br>
+            <input type="submit" name="submit_button1" value=" Run + View Funding Allocation Output" />
+            <input type="submit" name="submit_button2" value="Download Funding Allocation Output" />
+            {% else %}
+            <input type = "file" name = "file"/>
+            Budget:
+            <input type="text" name="budget_input" />
+            <br><br>
+            <input type="submit" name="submit_button3" value="Submit Uploaded File and Set Budget"/>
+            <br><br>
+            <input type="submit" name="submit_button1" value=" Run + View Funding Allocation Output" disabled/>
+            <input type="submit" name="submit_button2" value="Download Funding Allocation Output" disabled/>
+            {% endif %}
+            <br><br>
+            <input type="submit" name="reset1" value="Reset">
+
+            {% if errortype %}
+            <script>
+                function myFunction1(){
+                alert("{{errortype}} is incorrect")
+                }
+
+            </script>
+            <script>
+            myFunction1()
+            </script>
+
+
+            {% endif %}
+
+            {% if row_list %}
+            <script>
+                function myFunction2(){
+                alert("The following rows were removed from the data before running the heuristic: {{row_list}}")
+                }
+            myFunction2()
+
+            </script>
+
+
+            {% endif %}
+
+        </form>
+        <br>
+
+
+
+
+</body>
